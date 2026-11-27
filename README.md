@@ -84,13 +84,16 @@ getOperator("01912345678");          // "Banglalink"
 ### Bangla calendar / বঙ্গাব্দ
 
 ```js
-import { toBanglaDate, formatBanglaDate, fromBanglaDate } from "bdkit";
+import { toBanglaDate, formatBanglaDate, fromBanglaDate, banglaMonthName, banglaWeekdayName } from "bdkit";
 
 formatBanglaDate(new Date(2026, 3, 14));                    // "১ বৈশাখ ১৪৩৩ বঙ্গাব্দ"
 formatBanglaDate(new Date(), { weekday: true });            // "শুক্রবার, ১২ অগ্রহায়ণ ১৪৩৩ বঙ্গাব্দ"
 toBanglaDate(new Date(2025, 1, 21));
 // { year: 1431, month: 10, day: 8, monthName: "ফাল্গুন", weekday: "শুক্রবার", season: "বসন্ত" }
 fromBanglaDate(1433, 0, 1);                                 // Date: 14 April 2026
+banglaMonthName(1);                                         // "জ্যৈষ্ঠ"
+banglaMonthName(1, { lang: "en" });                         // "Joishtho"
+banglaWeekdayName(5, { lang: "en" });                       // "Friday"  (0 = Sunday, like Date#getDay)
 ```
 
 Follows the calendar revised by the Bangla Academy in 2019 and used officially in Bangladesh:
@@ -154,6 +157,7 @@ isValidPostcode("৭০০০");          // true
 | `toBanglaDigits(x)` / `toEnglishDigits(s)` | Digit conversion |
 | `normalizePhone(s)` / `isValidPhone(s)` / `toInternational(s)` / `getOperator(s)` | BD mobile numbers |
 | `toBanglaDate(date)` / `fromBanglaDate(y, m, d)` / `formatBanglaDate(date, opts)` | Bangla calendar |
+| `banglaMonthName(i, { lang? })` / `banglaWeekdayName(i, { lang? })` | Month / weekday names in Bangla or English |
 | `wordsToNumber(text, { bigint? })` | Bangla/English number words → number |
 | `toBanglaOrdinal(n, { words? })` / `toBanglaDayOrdinal(day)` | Ordinals |
 | `timeAgo(date, { now?, digits? })` | Relative time in Bangla |

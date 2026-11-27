@@ -10,11 +10,15 @@ export {
   fromBanglaDate,
   formatBanglaDate,
   banglaMonthLengths,
+  banglaMonthName,
+  banglaWeekdayName,
   BANGLA_MONTHS,
+  BANGLA_MONTHS_EN,
   BANGLA_WEEKDAYS,
+  BANGLA_WEEKDAYS_EN,
   BANGLA_SEASONS,
 } from "./calendar.js";
-export type { BanglaDate } from "./calendar.js";
+export type { BanglaDate, CalendarNameOptions } from "./calendar.js";
 export { wordsToNumber } from "./parse-words.js";
 export { toBanglaOrdinal, toBanglaDayOrdinal } from "./ordinal.js";
 export { timeAgo } from "./time-ago.js";
