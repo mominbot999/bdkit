@@ -1,0 +1,52 @@
+{
+  "name": "bdkit",
+  "version": "0.1.0",
+  "description": "Zero-dependency toolkit for Bangladesh: Taka in words (টাকা কথায়), lakh/crore formatting, Bangla digits, BD phone validation and the Bangla calendar (বঙ্গাব্দ).",
+  "main": "./dist/cjs/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc && tsc -p tsconfig.cjs.json && echo {\\\"type\\\":\\\"commonjs\\\"} > dist/cjs/package.json",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "bangladesh",
+    "bangla",
+    "bengali",
+    "taka",
+    "bdt",
+    "number-to-words",
+    "lakh",
+    "crore",
+    "bangla-calendar",
+    "bangabda",
+    "phone",
+    "invoice"
+  ],
+  "author": "Momin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.6.11",
+    "typescript": "^5.9.3"
+  },
+  "type": "module",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mominbot999/bdkit.git"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
