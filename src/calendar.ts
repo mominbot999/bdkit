@@ -8,6 +8,47 @@ export const BANGLA_WEEKDAYS = ["রবিবার", "সোমবার", "ম
 
 export const BANGLA_SEASONS = ["গ্রীষ্ম", "বর্ষা", "শরৎ", "হেমন্ত", "শীত", "বসন্ত"] as const;
 
+/** English (romanized) names of the Bangla months, in the same order as BANGLA_MONTHS. */
+// prettier-ignore
+export const BANGLA_MONTHS_EN = ["Boishakh", "Joishtho", "Asharh", "Shrabon", "Bhadro", "Ashwin",
+  "Kartik", "Ogrohayon", "Poush", "Magh", "Falgun", "Choitro"] as const;
+
+/** English weekday names, in the same order as BANGLA_WEEKDAYS (0 = Sunday, like Date#getDay). */
+export const BANGLA_WEEKDAYS_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as const;
+
+export interface CalendarNameOptions {
+  /** "bn" (default) for Bangla script, "en" for English. */
+  lang?: "bn" | "en";
+}
+
+function checkIndex(i: number, max: number, what: string) {
+  if (!Number.isInteger(i) || i < 0 || i > max) throw new RangeError(`Invalid ${what}: ${i}`);
+}
+
+/**
+ * Name of a Bangla month by 0-based index (0 = বৈশাখ).
+ * banglaMonthName(0) → "বৈশাখ", banglaMonthName(1, { lang: "en" }) → "Joishtho"
+ */
+export function banglaMonthName(
+  i: number,
+  opts: CalendarNameOptions = {},
+): (typeof BANGLA_MONTHS)[number] | (typeof BANGLA_MONTHS_EN)[number] {
+  checkIndex(i, 11, "month");
+  return (opts.lang === "en" ? BANGLA_MONTHS_EN : BANGLA_MONTHS)[i];
+}
+
+/**
+ * Weekday name by 0-based index (0 = Sunday, same as Date#getDay).
+ * banglaWeekdayName(5) → "শুক্রবার", banglaWeekdayName(5, { lang: "en" }) → "Friday"
+ */
+export function banglaWeekdayName(
+  i: number,
+  opts: CalendarNameOptions = {},
+): (typeof BANGLA_WEEKDAYS)[number] | (typeof BANGLA_WEEKDAYS_EN)[number] {
+  checkIndex(i, 6, "weekday");
+  return (opts.lang === "en" ? BANGLA_WEEKDAYS_EN : BANGLA_WEEKDAYS)[i];
+}
+
 export interface BanglaDate {
   /** Bangla year (বঙ্গাব্দ), e.g. 1433 */
   year: number;
