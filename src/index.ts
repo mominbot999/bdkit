@@ -15,3 +15,11 @@ export {
   BANGLA_SEASONS,
 } from "./calendar.js";
 export type { BanglaDate } from "./calendar.js";
+export { wordsToNumber } from "./parse-words.js";
+export { toBanglaOrdinal, toBanglaDayOrdinal } from "./ordinal.js";
+export { timeAgo } from "./time-ago.js";
+export { isValidNIDFormat, isValidPostcode } from "./ids.js";
+export { parsePlate, isValidPlate, formatPlate } from "./plate.js";
+export type { VehiclePlate } from "./plate.js";
+export { DIVISIONS, DISTRICTS, getDistrict, getDivision, getDistrictsByDivision } from "./geo.js";
+export type { Division, District } from "./geo.js";

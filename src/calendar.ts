@@ -1,8 +1,8 @@
 import { toBanglaDigits } from "./digits.js";
 
 // prettier-ignore
-export const BANGLA_MONTHS = ["বৈশাখ", "জ্যৈষ্ঠ", "আষাঢ়", "শ্রাবণ", "ভাদ্র", "আশ্বিন",
-  "কার্তিক", "অগ্রহায়ণ", "পৌষ", "মাঘ", "ফাল্গুন", "চৈত্র"] as const;
+export const BANGLA_MONTHS = ["বৈশাখ", "জ্যৈষ্ঠ", "আষাঢ়", "শ্রাবণ", "ভাদ্র", "আশ্বিন",
+  "কার্তিক", "অগ্রহায়ণ", "পৌষ", "মাঘ", "ফাল্গুন", "চৈত্র"] as const;
 
 export const BANGLA_WEEKDAYS = ["রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার"] as const;
 
@@ -79,7 +79,7 @@ export function fromBanglaDate(year: number, month: number, day: number): Date {
 }
 
 /**
- * Format a date in Bangla, e.g. "১৩ অগ্রহায়ণ ১৪৩৩ বঙ্গাব্দ".
+ * Format a date in Bangla, e.g. "১৩ অগ্রহায়ণ ১৪৩৩ বঙ্গাব্দ".
  * Options: weekday (prefix weekday), suffix (append "বঙ্গাব্দ", default true).
  */
 export function formatBanglaDate(

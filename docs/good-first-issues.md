@@ -2,11 +2,11 @@
 
 Copy each block into a new GitHub issue and add the label `good first issue` (and `help wanted`).
 
-1. **Add `toBanglaOrdinal(n)`** — 1 → "প্রথম", 2 → "দ্বিতীয়", 3 → "তৃতীয়", … 10 → "দশম", and "১১তম" style after that. Include tests.
+1. **Ordinal words 11–20** — একাদশ, দ্বাদশ … বিংশ for `toBanglaOrdinal(n, { words: true })`.
 2. **Add Bangla time formatting** — `formatBanglaTime(date)` → "সকাল ১০টা ৩০ মিনিট" (ভোর/সকাল/দুপুর/বিকাল/সন্ধ্যা/রাত). Include tests.
-3. **Add Bangladesh divisions & districts data** — export the 8 divisions and 64 districts with Bangla + English names (cite the source).
-4. **Validate Bangladeshi postcodes** — `isValidPostcode("7000")` (4 digits) and, optionally, a lookup for district → postcode range.
-5. **NID number format check** — `isValidNID(s)`: accept 10, 13 or 17 digit formats (format only, no lookup).
+3. **Add upazila data** for one division at a time (cite the source) — great for splitting among many contributors.
+4. **Postcode → district lookup** — e.g. 7000 → Kushtia.
+5. **PHP port** — `bdkit-php` with takaInWords and digits, for Laravel/WordPress users.
 6. **`banglaMonthName(i, { en: true })`** — English transliterations ("Boishakh", "Joishtho" …) for the calendar.
 7. **Add `toBanglaWeekday` / English weekday names** helper and document it.
 8. **Python port** — start a `python/` folder with `taka_in_words` and `to_bangla_digits`, with pytest tests.

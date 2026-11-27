@@ -12,6 +12,12 @@
 - ০১২ **Bangla ⇄ English digits**
 - 📱 **BD mobile numbers** — validate, normalize, `+880` format, operator detection
 - 📅 **Bangla calendar (বঙ্গাব্দ)** — the official 2019 revised Bangladesh calendar
+- 🔁 **Words → number** — `"এক লক্ষ পঁচিশ হাজার"` → `125000`
+- 🥇 **Ordinals** — `১ম`, `৪র্থ`, `দ্বিতীয়`, and date style `১লা`, `২১শে`
+- ⏱️ **Time ago** — `৫ মিনিট আগে`
+- 🗺️ **8 divisions & 64 districts** — Bangla + official English names, old spellings understood
+- 🚗 **Vehicle plates** — parse `ঢাকা মেট্রো-গ ১২-৩৪৫৬`
+- 🪪 **NID & postcode** format checks
 
 Works in Node.js (ESM + CommonJS), browsers, Deno and Bun. Fully typed (TypeScript).
 
@@ -91,6 +97,52 @@ Follows the calendar revised by the Bangla Academy in 2019 and used officially i
 পহেলা বৈশাখ is always 14 April, বৈশাখ–আশ্বিন have 31 days, ফাল্গুন has 29 days (30 in a leap year)
 and the rest have 30 — so ২১ ফেব্রুয়ারি is always ৮ ফাল্গুন and ১৬ ডিসেম্বর is always ১ পৌষ.
 
+### Words → number
+
+```js
+import { wordsToNumber } from "bdkit";
+
+wordsToNumber("এক লক্ষ পঁচিশ হাজার");           // 125000
+wordsToNumber("পাঁচশো টাকা মাত্র");               // 500
+wordsToNumber("৫ হাজার");                         // 5000
+wordsToNumber("One Lakh Twenty-Five Thousand");   // 125000
+```
+
+### Ordinals & time
+
+```js
+import { toBanglaOrdinal, toBanglaDayOrdinal, timeAgo } from "bdkit";
+
+toBanglaOrdinal(4);                    // "৪র্থ"
+toBanglaOrdinal(2, { words: true });   // "দ্বিতীয়"
+toBanglaDayOrdinal(21);                // "২১শে"  (২১শে ফেব্রুয়ারি)
+toBanglaDayOrdinal(1);                 // "১লা"
+timeAgo(Date.now() - 5 * 60 * 1000);   // "৫ মিনিট আগে"
+```
+
+### Divisions & districts
+
+```js
+import { DIVISIONS, DISTRICTS, getDistrict, getDistrictsByDivision } from "bdkit";
+
+getDistrict("কুষ্টিয়া");    // { id: "kushtia", name: "Kushtia", bn: "কুষ্টিয়া", division: "khulna" }
+getDistrict("Chittagong");  // old spelling → { name: "Chattogram", bn: "চট্টগ্রাম", ... }
+getDistrictsByDivision("খুলনা").length;  // 10
+```
+
+Great for address forms and dropdowns.
+
+### Vehicle plates, NID, postcode
+
+```js
+import { parsePlate, isValidNIDFormat, isValidPostcode } from "bdkit";
+
+parsePlate("ঢাকা মেট্রো-গ ১২-৩৪৫৬");
+// { area: "ঢাকা", metro: true, classLetter: "গ", series: "12", number: "3456" }
+isValidNIDFormat("1234567890");  // true  (10, 13 or 17 digits — format only)
+isValidPostcode("৭০০০");          // true
+```
+
 ## API
 
 | Function | Description |
@@ -102,6 +154,12 @@ and the rest have 30 — so ২১ ফেব্রুয়ারি is always �
 | `toBanglaDigits(x)` / `toEnglishDigits(s)` | Digit conversion |
 | `normalizePhone(s)` / `isValidPhone(s)` / `toInternational(s)` / `getOperator(s)` | BD mobile numbers |
 | `toBanglaDate(date)` / `fromBanglaDate(y, m, d)` / `formatBanglaDate(date, opts)` | Bangla calendar |
+| `wordsToNumber(text, { bigint? })` | Bangla/English number words → number |
+| `toBanglaOrdinal(n, { words? })` / `toBanglaDayOrdinal(day)` | Ordinals |
+| `timeAgo(date, { now?, digits? })` | Relative time in Bangla |
+| `DIVISIONS` / `DISTRICTS` / `getDistrict` / `getDivision` / `getDistrictsByDivision` | Administrative areas |
+| `parsePlate` / `isValidPlate` / `formatPlate` | Vehicle registration plates |
+| `isValidNIDFormat` / `isValidPostcode` | ID format checks |
 
 ## Contributing / অবদান রাখুন
 
@@ -109,8 +167,11 @@ New contributors are very welcome — বাংলায় বা ইংরে�
 See [CONTRIBUTING.md](CONTRIBUTING.md) and issues labelled
 [`good first issue`](https://github.com/mominbot999/bdkit/labels/good%20first%20issue).
 
-Ideas on the roadmap: Bangladesh division/district/upazila data, NID & postcode validation,
-Bangla time formatting (`সকাল ১০টা`), ordinal words (`প্রথম`, `দ্বিতীয়`), Python port.
+Ideas on the roadmap: upazila data, postcode → area lookup, Bangla time formatting (`সকাল ১০টা`),
+bank routing numbers, a **Python port** and a **PHP port** (like brazilian-utils has for many languages).
+
+Inspired by [persian-tools](https://github.com/persian-tools/persian-tools) and
+[brazilian-utils](https://github.com/brazilian-utils/brazilian-utils).
 
 ## License
 

@@ -38,7 +38,7 @@ test("numberToWords bn", () => {
   assert.equal(numberToWords(250), "দুইশত পঞ্চাশ");
   assert.equal(numberToWords(125000), "এক লক্ষ পঁচিশ হাজার");
   assert.equal(numberToWords(10000000), "এক কোটি");
-  assert.equal(numberToWords(1234567890), "একশত তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশত নব্বই");
+  assert.equal(numberToWords(1234567890), "একশত তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশত নব্বই");
   assert.equal(numberToWords(-15), "ঋণাত্মক পনেরো");
 });
 
@@ -49,12 +49,12 @@ test("numberToWords en", () => {
 });
 
 test("takaInWords", () => {
-  assert.equal(takaInWords(1250.5), "এক হাজার দুইশত পঞ্চাশ টাকা পঞ্চাশ পয়সা মাত্র");
+  assert.equal(takaInWords(1250.5), "এক হাজার দুইশত পঞ্চাশ টাকা পঞ্চাশ পয়সা মাত্র");
   assert.equal(takaInWords(1250.5, { lang: "en" }), "One Thousand Two Hundred Fifty Taka and Fifty Paisa Only");
   assert.equal(takaInWords(0), "শূন্য টাকা মাত্র");
-  assert.equal(takaInWords(0.75), "পঁচাত্তর পয়সা মাত্র");
+  assert.equal(takaInWords(0.75), "পঁচাত্তর পয়সা মাত্র");
   assert.equal(takaInWords("১০০০০০", { only: false }), "এক লক্ষ টাকা");
-  assert.equal(takaInWords(12345678901234567890n), "এক লক্ষ তেইশ হাজার চারশত ছাপ্পান্ন কোটি আটাত্তর লক্ষ নব্বই হাজার একশত তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশত নব্বই টাকা মাত্র");
+  assert.equal(takaInWords(12345678901234567890n), "এক লক্ষ তেইশ হাজার চারশত ছাপ্পান্ন কোটি আটাত্তর লক্ষ নব্বই হাজার একশত তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশত নব্বই টাকা মাত্র");
 });
 
 test("phone", () => {
@@ -86,7 +86,7 @@ test("bangla calendar: known dates (revised 2019 calendar)", () => {
   assert.deepEqual(pick(toBanglaDate(d(2024, 3, 14))), [1430, 10, 30]);
   assert.deepEqual(pick(toBanglaDate(d(2024, 3, 15))), [1430, 11, 1]);
   assert.deepEqual(pick(toBanglaDate(d(2025, 3, 15))), [1431, 11, 1]);
-  assert.equal(toBanglaDate(d(2026, 11, 27)).monthName, "অগ্রহায়ণ");
+  assert.equal(toBanglaDate(d(2026, 11, 27)).monthName, "অগ্রহায়ণ");
 });
 
 test("bangla calendar round-trip for every day 2020-2030", () => {

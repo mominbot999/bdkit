@@ -1,6 +1,6 @@
 {
   "name": "bdkit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Zero-dependency toolkit for Bangladesh: Taka in words (টাকা কথায়), lakh/crore formatting, Bangla digits, BD phone validation and the Bangla calendar (বঙ্গাব্দ).",
   "main": "./dist/cjs/index.js",
   "scripts": {
