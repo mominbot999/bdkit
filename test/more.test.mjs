@@ -4,6 +4,7 @@ import {
   wordsToNumber, numberToWords, toBanglaOrdinal, toBanglaDayOrdinal, timeAgo,
   isValidNIDFormat, isValidPostcode, parsePlate, isValidPlate, formatPlate,
   DIVISIONS, DISTRICTS, getDistrict, getDivision, getDistrictsByDivision,
+  banglaMonthName, banglaWeekdayName, BANGLA_MONTHS, BANGLA_MONTHS_EN, BANGLA_WEEKDAYS_EN, toBanglaDate,
 } from "../dist/esm/index.js";
 
 test("wordsToNumber basics", () => {
@@ -96,4 +97,26 @@ test("divisions and districts", () => {
   assert.equal(getDivision("barisal")?.bn, "বরিশাল");
   assert.equal(getDistrictsByDivision("খুলনা").length, 10);
   assert.equal(getDistrictsByDivision("Dhaka").length, 13);
+});
+
+test("banglaMonthName / banglaWeekdayName", () => {
+  assert.equal(banglaMonthName(0), "বৈশাখ");
+  assert.equal(banglaMonthName(0, { lang: "bn" }), "বৈশাখ");
+  assert.equal(banglaMonthName(0, { lang: "en" }), "Boishakh");
+  assert.equal(banglaMonthName(1, { lang: "en" }), "Joishtho");
+  assert.equal(banglaMonthName(11, { lang: "en" }), "Choitro");
+  assert.equal(BANGLA_MONTHS_EN.length, 12);
+  BANGLA_MONTHS.forEach((m, i) => assert.equal(banglaMonthName(i), m));
+  // works with toBanglaDate().month: 21 February = 8 Falgun
+  assert.equal(banglaMonthName(toBanglaDate(new Date(2025, 1, 21)).month, { lang: "en" }), "Falgun");
+
+  assert.equal(banglaWeekdayName(5), "শুক্রবার");
+  assert.equal(banglaWeekdayName(0, { lang: "en" }), "Sunday");
+  assert.equal(banglaWeekdayName(5, { lang: "en" }), "Friday");
+  assert.equal(BANGLA_WEEKDAYS_EN.length, 7);
+  // same index as Date#getDay: 14 April 2026 is a Tuesday
+  assert.equal(banglaWeekdayName(new Date(2026, 3, 14).getDay(), { lang: "en" }), "Tuesday");
+
+  for (const bad of [-1, 12, 1.5, NaN]) assert.throws(() => banglaMonthName(bad), RangeError);
+  for (const bad of [-1, 7, 2.5]) assert.throws(() => banglaWeekdayName(bad), RangeError);
 });
